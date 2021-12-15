@@ -1,5 +1,9 @@
 # web
 
+## 项目说明
+```
+毕业设计
+```
 ## Project setup
 ```
 npm install
