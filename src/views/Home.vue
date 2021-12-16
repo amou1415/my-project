@@ -32,7 +32,7 @@ export default {
 <style lang="less" scoped>
 .homeBody {
   width: 100vw;
-  min-height: 150vh;
+  min-height: 100vh;
 
   .indexImg {
     width: 100vw;
