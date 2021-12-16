@@ -52,6 +52,7 @@
       <v-row justify="center">
         <v-dialog v-model="dialog" persistent max-width="450px">
           <v-card>
+            <!-- title-img -->
             <v-card-title>
               <img
                 class="title-img"
@@ -59,9 +60,13 @@
                 alt="logo"
               />
             </v-card-title>
+
+            <!-- title -->
             <v-card-title>
               <span class="font-weight-bold text-h5">登陆</span>
             </v-card-title>
+
+            <!-- 对话内容 -->
             <v-card-text>
               <v-container>
                 <v-col cols="12">
@@ -76,11 +81,17 @@
                 </v-col>
               </v-container>
             </v-card-text>
+
+            <!-- 对话框按钮 -->
             <v-card-actions>
               <v-spacer></v-spacer>
+
+              <!-- 取消 -->
               <v-btn :disabled="loading" class="ma-2" color="info" @click="dialog = false">
                 取消
               </v-btn>
+
+              <!-- 登陆 -->
               <v-btn
                 class="ma-2"
                 :loading="loading"
