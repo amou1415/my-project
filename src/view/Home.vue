@@ -1,5 +1,5 @@
 <template>
-  <h1>444</h1>
+  <h1>home</h1>
   
 </template>
 
