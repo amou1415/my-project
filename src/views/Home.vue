@@ -36,7 +36,7 @@ export default {
 
   .indexImg {
     width: 100vw;
-    padding: 0px 30px 10px 30px;
+    padding: 0px 70px 10px 70px;
   }
 }
 </style>

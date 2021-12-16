@@ -87,7 +87,12 @@
               <v-spacer></v-spacer>
 
               <!-- 取消 -->
-              <v-btn :disabled="loading" class="ma-2" color="info" @click="dialog = false">
+              <v-btn
+                :disabled="loading"
+                class="ma-2"
+                color="info"
+                @click="dialog = false"
+              >
                 取消
               </v-btn>
 
@@ -123,67 +128,68 @@ export default {
     };
   },
   watch: {
-      loader () {
-        const l = this.loader
-        this[l] = !this[l]
+    loader() {
+      const l = this.loader;
+      this[l] = !this[l];
 
-        setTimeout(() => (this[l] = false), 3000)
+      setTimeout(() => (this[l] = false), 3000);
 
-        this.loader = null
-      },
-    },
-  methods: {
-    login() {
-      this.dialog = true;
+      this.loader = null;
     },
   },
+  methods: {},
 };
 </script>
 
 <style lang="less" scoped>
+// 对话框logo
 .title-img {
   display: block;
   width: 120px;
 }
+
+// 登陆按钮等待动画
 .custom-loader {
-    animation: loader 1s infinite;
-    display: flex;
+  animation: loader 1s infinite;
+  display: flex;
+}
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
   }
-  @-moz-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
   }
-  @-webkit-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+}
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
   }
-  @-o-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
   }
-  @keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+}
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
   }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// 头部全局视口
 .viewport {
   width: 100vw;
-  padding: 15px 50px;
+  padding: 15px 75px;
 
   .logo {
     width: 125px;
@@ -194,8 +200,10 @@ export default {
     margin-left: -999999999px;
   }
 
+  // 导航
   .nav {
-    width: 400px;
+    max-width: 340px;
+    overflow-y: auto;
     margin-left: 20px;
 
     .nav-item {
@@ -214,6 +222,7 @@ export default {
     }
   }
 
+  // 头像
   .user {
     width: 30px;
     cursor: pointer;
