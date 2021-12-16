@@ -4,6 +4,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios';
 // 引入初始化样式
 import './assets/common.css'
+// 引入动画库
+import './assets/animate.min.css'
 import App from './App.vue'
 
 Vue.use(ElementUI)
