@@ -1,5 +1,5 @@
 <template>
-  <h1>联系我们</h1>
+  <h1>排行榜</h1>
 </template>
 <script>
   export default {
