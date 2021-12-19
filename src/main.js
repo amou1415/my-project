@@ -16,9 +16,11 @@ import './assets/css/init.css'
 // 引入动画库
 import './assets/css/animate.min.css'
 
+import qs from 'qs'
+
 import App from './App.vue'
 
-Vue.use(ElementUI)
+Vue.use(ElementUI).use(qs)
 
 Vue.config.productionTip = false
 

@@ -18,13 +18,18 @@
           <v-card-text>
             <v-container>
               <v-col cols="12">
-                <v-text-field label="用户名*" required></v-text-field>
+                <v-text-field
+                  label="用户名*"
+                  v-model="u_name"
+                  required
+                ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
                   label="密码*"
                   type="password"
                   required
+                  v-model="pw"
                 ></v-text-field>
               </v-col>
             </v-container>
@@ -45,7 +50,7 @@
               :loading="loading"
               :disabled="loading"
               color="info"
-              @click="loader = 'loading'"
+              @click="login"
             >
               登陆
               <template v-slot:loader>
@@ -62,28 +67,47 @@
 </template>
 
 <script>
+import axios from "axios";
+import qs from "qs";
+
 export default {
-  name: "loginDialog",
+  name: "Login",
   data() {
     return {
       loader: null,
       loading: false,
+      u_name: "",
+      pw: "",
     };
   },
   props: ["dialog"],
   watch: {
-    loader() {
-      const l = this.loader;
-      this[l] = !this[l];
-
-      setTimeout(() => (this[l] = false), 3000);
-
-      this.loader = null;
-    },
+    // loader() {
+    //   const l = this.loader;
+    //   this[l] = !this[l];
+    //   setTimeout(() => (this[l] = false), 3000);
+    //   this.loader = null;
+    // },
   },
   methods: {
     close() {
       this.$emit("sand-close-dialog");
+    },
+    login() {
+      this.loader = false;
+      axios
+        .post(
+          "/api/login",
+          qs.stringify({ username: this.u_name, password: this.pw })
+        )
+        .then(function (res) {
+          console.log(res);
+          this.loader = null;
+        })
+        .catch(function (err) {
+          console.log(err);
+          this.loader = null;
+        });
     },
   },
 };
