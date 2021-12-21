@@ -19,7 +19,7 @@
             <v-container>
               <v-col cols="12">
                 <v-text-field
-                  label="用户名*"
+                  label="Email*"
                   v-model="u_name"
                   required
                 ></v-text-field>
@@ -33,6 +33,7 @@
                 ></v-text-field>
               </v-col>
             </v-container>
+            <small>*首次登陆即注册</small>
           </v-card-text>
 
           <!-- 对话框按钮 -->
