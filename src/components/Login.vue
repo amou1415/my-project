@@ -27,7 +27,6 @@
               <v-col cols="12">
                 <v-text-field
                   label="Email*"
-                  type="password"
                   required
                   v-model="pw"
                 ></v-text-field>
@@ -79,20 +78,28 @@ export default {
       loading: false,
       u_name: "",
       pw: "",
-      u_msg:{
-          name:'',
-          email:''
-      }
+      u_msg: {
+        name: "",
+        email: "",
+      },
     };
   },
   props: ["dialog"],
   watch: {},
   methods: {
     close() {
-      this.$emit("sand-close-dialog");
+      this.$emit("sand-close-dialog",'');
     },
     loginSuccess() {
-      this.$emit("sand-close-dialog",this.u_msg);
+      this.$emit("sand-close-dialog", this.u_msg);
+    },
+    emptyText() {
+      this.u_name = "";
+      this.pw = "";
+      this.u_msg = {
+        name: "",
+        email: "",
+      }
     },
     login() {
       this.loader = "loading";
@@ -106,13 +113,15 @@ export default {
         )
         .then(function (res) {
           console.log(res);
-          that_.u_msg.name = res.data.user[0].u_name
-          that_.u_msg.email = res.data.user[0].email
-          that_.loginSuccess()
+          that_.u_msg.name = res.data.user[0].u_name;
+          that_.u_msg.email = res.data.user[0].email;
+          that_.loginSuccess();
+          that_.emptyText();
           that_[l] = false;
         })
         .catch(function (err) {
           console.log(err);
+          that_.emptyText();
           that_[l] = false;
         });
       this.loader = null;

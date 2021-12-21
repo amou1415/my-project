@@ -44,12 +44,34 @@
         src="../../assets/images/denglu.png"
         @click.stop="login"
         v-if="!succ_img"
+        :class="lg_out"
         alt="头像"
       />
       <!-- 登陆后头像 -->
-      <img 
-      src="../../assets/images/yuhangyuan.png" class="animate__animated animate__fadeInDown cancel_hand" 
-      v-if="succ_img" alt="头像" />
+      <div v-popover:sign-out>
+        <img
+          src="../../assets/images/yuhangyuan.png"
+          class="animate__animated animate__fadeInDown cancel_hand"
+          v-if="succ_img"
+          alt="头像"
+        />
+        <!-- 用户信息提示框/退出登录 -->
+        <el-popover
+          ref="sign-out"
+          placement="top"
+          title="个人中心"
+          trigger="hover"
+          v-model="close_popover"
+        >
+          <p style="font-size: 14px; margin-bottom: 10px;" v-text="'昵称：' + msg.name"></p>
+          <p style="font-size: 14px; margin-bottom: 10px;" v-text="'Email：' + msg.email"></p>
+          <div style="text-align: right; margin: 0">
+            <el-button @click="loginOut" type="primary" plain size="mini"
+              >退出登陆</el-button
+            >
+          </div>
+        </el-popover>
+      </div>
     </div>
 
     <!-- 登陆 -->
@@ -66,25 +88,34 @@ export default {
   },
   data() {
     return {
+      close_popover: false,
+      lg_out: "",
       dialog: false,
       loader: null,
       loading: false,
-      msg:'',
-      succ_img:false
+      msg: "",
+      succ_img: false,
     };
   },
-  watch: {
-    
-  },
+  watch: {},
   methods: {
+    loginOut() {
+      this.lg_out = "animate__animated animate__fadeInDown";
+      this.close_popover = false;
+      this.succ_img = false;
+      this.msg = "";
+    },
     login() {
       this.dialog = true;
     },
     close(msg) {
       this.dialog = false;
-      if(msg != ''){
-        console.log(msg);
+      if (msg != "") {
         this.msg = msg;
+        this.$message({
+          message: "欢迎！尊敬的  " + msg.name,
+          type: "success",
+        });
         this.succ_img = true;
       }
     },
