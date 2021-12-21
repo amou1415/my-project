@@ -50,7 +50,7 @@
               :loading="loading"
               :disabled="loading"
               color="info"
-              @click="loader = 'loading'"
+              @click="login"
             >
               登陆
               <template v-slot:loader>
@@ -81,20 +81,16 @@ export default {
     };
   },
   props: ["dialog"],
-  watch: {
-    loader() {
-      const l = this.loader;
-      this[l] = !this[l];
-      setTimeout(() => (this.login()), 3000);
-      this.loader = null;
-    },
-  },
+  watch: {},
   methods: {
     close() {
       this.$emit("sand-close-dialog");
     },
     login() {
-        let that_ = this
+      this.loader = "loading";
+      const l = this.loader;
+      this[l] = !this[l];
+      let that_ = this;
       axios
         .post(
           "/api/login",
@@ -102,12 +98,13 @@ export default {
         )
         .then(function (res) {
           console.log(res);
-          that_.loader = null;
+          that_[l] = false;
         })
         .catch(function (err) {
           console.log(err);
-          that_.loader = null;
+          that_[l] = false;
         });
+      this.loader = null;
     },
   },
 };
