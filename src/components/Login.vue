@@ -10,27 +10,37 @@
           </v-card-title>
 
           <!-- title -->
-          <v-card-title>
+          <v-card-title style="padding: 7px 24px 0px">
             <span class="font-weight-bold text-h5">登陆</span>
           </v-card-title>
 
           <!-- 对话内容 -->
           <v-card-text>
-            <v-container>
-              <v-col cols="12">
-                <v-text-field
-                  label="昵称*"
-                  v-model="u_name"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="Email*"
-                  required
-                  v-model="pw"
-                ></v-text-field>
-              </v-col>
+            <v-container style="padding: 0px 12px 12px 12px">
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <v-col cols="12">
+                  <v-text-field
+                    label="昵称*"
+                    :rules="rules.name"
+                    hide-details="auto"
+                    v-model="u_name"
+                    name="name"
+                    required
+                    clearable
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    label="Email*"
+                    :rules="rules.email"
+                    hide-details="auto"
+                    required
+                    name="email"
+                    clearable
+                    v-model="pw"
+                  ></v-text-field>
+                </v-col>
+              </v-form>
             </v-container>
             <small>*首次登陆即注册</small>
           </v-card-text>
@@ -48,7 +58,7 @@
             <v-btn
               class="ma-2"
               :loading="loading"
-              :disabled="loading"
+              :disabled="!valid"
               color="info"
               @click="login"
             >
@@ -74,6 +84,21 @@ export default {
   name: "Login",
   data() {
     return {
+      valid: true,
+      rules: {
+        name: [
+          (value) => !!value || "不能为空.",
+          (value) => (value || "").length <= 6 || "最大6个字符",
+        ],
+        email: [
+          (value) => !!value || "不能为空.",
+          (value) => {
+            const pattern =
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return pattern.test(value) || "请输入正确邮箱";
+          },
+        ],
+      },
       loader: null,
       loading: false,
       u_name: "",
@@ -87,20 +112,25 @@ export default {
   props: ["dialog"],
   watch: {},
   methods: {
+    // 关闭对话框
     close() {
-      this.$emit("sand-close-dialog",'');
+      this.$emit("sand-close-dialog", "");
+      this.emptyText();
     },
+    // 登陆成功
     loginSuccess() {
       this.$emit("sand-close-dialog", this.u_msg);
     },
+    // 清除对话框内容
     emptyText() {
       this.u_name = "";
       this.pw = "";
       this.u_msg = {
         name: "",
         email: "",
-      }
+      };
     },
+    // 登陆
     login() {
       this.loader = "loading";
       const l = this.loader;
