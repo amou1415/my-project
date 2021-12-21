@@ -39,12 +39,17 @@
 
     <!-- 登陆/注册 -->
     <div class="user fr">
+      <!-- 未登陆头像 -->
       <img
         src="../../assets/images/denglu.png"
         @click.stop="login"
+        v-if="!succ_img"
         alt="头像"
       />
-      <img src="../../assets/images/yuhangyuan.png" v-if="false" alt="头像" />
+      <!-- 登陆后头像 -->
+      <img 
+      src="../../assets/images/yuhangyuan.png" class="animate__animated animate__fadeInDown cancel_hand" 
+      v-if="succ_img" alt="头像" />
     </div>
 
     <!-- 登陆 -->
@@ -64,30 +69,34 @@ export default {
       dialog: false,
       loader: null,
       loading: false,
+      msg:'',
+      succ_img:false
     };
   },
   watch: {
-    loader() {
-      const l = this.loader;
-      this[l] = !this[l];
-
-      setTimeout(() => (this[l] = false), 3000);
-
-      this.loader = null;
-    },
+    
   },
   methods: {
     login() {
       this.dialog = true;
     },
-    close() {
+    close(msg) {
       this.dialog = false;
+      if(msg != ''){
+        console.log(msg);
+        this.msg = msg;
+        this.succ_img = true;
+      }
     },
   },
 };
 </script>
 
 <style lang="less" scoped>
+// 登陆成功取消头像鼠标点击手势 取消
+.cancel_hand {
+  cursor: initial;
+}
 // 对话框logo
 .title-img {
   display: block;

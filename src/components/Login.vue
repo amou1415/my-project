@@ -19,14 +19,14 @@
             <v-container>
               <v-col cols="12">
                 <v-text-field
-                  label="Email*"
+                  label="昵称*"
                   v-model="u_name"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  label="密码*"
+                  label="Email*"
                   type="password"
                   required
                   v-model="pw"
@@ -79,6 +79,10 @@ export default {
       loading: false,
       u_name: "",
       pw: "",
+      u_msg:{
+          name:'',
+          email:''
+      }
     };
   },
   props: ["dialog"],
@@ -86,6 +90,9 @@ export default {
   methods: {
     close() {
       this.$emit("sand-close-dialog");
+    },
+    loginSuccess() {
+      this.$emit("sand-close-dialog",this.u_msg);
     },
     login() {
       this.loader = "loading";
@@ -99,6 +106,9 @@ export default {
         )
         .then(function (res) {
           console.log(res);
+          that_.u_msg.name = res.data.user[0].u_name
+          that_.u_msg.email = res.data.user[0].email
+          that_.loginSuccess()
           that_[l] = false;
         })
         .catch(function (err) {
