@@ -11,27 +11,27 @@
       <ul class="clearfix">
         <li class="nav-item fl">
           <router-link to="/" replace>
-            <box class="text">首页</box>
+            <a class="text">首页</a>
           </router-link>
         </li>
         <li class="nav-item fl">
           <router-link to="/top" replace>
-            <box class="text">排行榜</box>
+            <a class="text">排行榜</a>
           </router-link>
         </li>
         <li class="nav-item fl">
           <router-link to="/new-game" replace>
-            <box class="text">新游</box>
+            <a class="text">新游</a>
           </router-link>
         </li>
         <li class="nav-item fl">
           <router-link to="/about" replace>
-            <box class="text">联系我们</box>
+            <a class="text">联系我们</a>
           </router-link>
         </li>
         <li class="nav-item fl">
           <router-link to="/open-platform" replace>
-            <box class="text">开放平台</box>
+            <a class="text">开放平台</a>
           </router-link>
         </li>
       </ul>
@@ -83,7 +83,7 @@
 import loginDialog from "../Login";
 
 export default {
-  name: "Header",
+
   components: {
     loginDialog,
   },
@@ -178,7 +178,7 @@ export default {
 // 头部全局视口
 .viewport {
   width: 100vw;
-  padding: 15px 75px;
+  padding: 15px 5.859vw;
 
   .logo {
     width: 125px;
