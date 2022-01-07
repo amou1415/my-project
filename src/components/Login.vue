@@ -88,7 +88,7 @@ export default {
       rules: {
         name: [
           (value) => !!value || "不能为空.",
-          (value) => (value || "").length <= 6 || "最大6个字符",
+          (value) => (value || "").length <= 12 || "最大12个字符",
         ],
         email: [
           (value) => !!value || "不能为空.",
@@ -128,33 +128,52 @@ export default {
       this.u_msg = {
         name: "",
         email: "",
+        id:""
       };
     },
     // 登陆
     login() {
-      this.loader = "loading";
-      const l = this.loader;
-      this[l] = !this[l];
-      let that_ = this;
-      axios
-        .post(
-          "/api/login",
-          qs.stringify({ username: this.u_name, password: this.pw })
-        )
-        .then(function (res) {
-          console.log(res);
-          that_.u_msg.name = res.data.user[0].u_name;
-          that_.u_msg.email = res.data.user[0].email;
-          that_.loginSuccess();
-          that_.emptyText();
-          that_[l] = false;
-        })
-        .catch(function (err) {
-          console.log(err);
-          that_.emptyText();
-          that_[l] = false;
+        let that_ = this;
+      if (this.u_name == "" || this.pw == "") {
+        that_.$message.error({
+          message: "请先输入完整信息",
         });
-      this.loader = null;
+      } else {
+        this.loader = "loading";
+        const l = this.loader;
+        this[l] = !this[l];
+        axios
+          .post(
+            "/api/login",
+            qs.stringify({ username: this.u_name, password: this.pw })
+          )
+          .then((res) => {
+            console.log(res);
+            if (res.data.msg == 'true') {
+              that_.u_msg.name = res.data.user[0].u_name;
+              that_.u_msg.email = res.data.user[0].email;
+              that_.u_msg.id = res.data.user[0].id;
+              that_[l] = false;
+              that_.loginSuccess();
+              setTimeout(()=>{
+                  that_.emptyText();
+              },200)
+            } else {
+              that_.$message.error({
+                message: res.data.error,
+              });
+              that_[l] = false;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            that_.$message.error({
+              message: err,
+            });
+            that_[l] = false;
+          });
+        this.loader = null;
+      }
     },
   },
 };

@@ -7,13 +7,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-// app.post('/login', (req, res) => {
-//     let data = req.body;
 
-// console.log(data);
-
-//     res.send("登录成功!")
-// })
 // 登录路由
 app.post('/login', (req, res) => {
     let data = req.body;
@@ -24,15 +18,37 @@ app.post('/login', (req, res) => {
         data.username,
         data.password
     ]
+
     mysqlbase.mysql_base(sql, sqlData, (results) => {
         // 返回查询结果
-        console.log(results);
+        console.log(results[0], '结果');
         if (results[0] != undefined) {
             // 用户保存信息
             res.send({
                 msg: 'true',
                 user: results
             });
+        } else if (results[0] === undefined) {
+            let insertDate = {
+                u_name: data.username,
+                email: data.password,
+            }
+            mysqlbase.mysql_base("insert into user set ?", insertDate, (inser_results) => {
+                if (inser_results.affectedRows > 0) {
+                    
+                    mysqlbase.mysql_base('select * from user where u_name = ? and email = ?', sqlData, (inser_msg) => {
+                        res.send({
+                            msg: 'true',
+                            user: inser_msg
+                        });
+                    })
+                } else {
+                    res.send({
+                        msg: 'false',
+                        user: inser_results
+                    });
+                }
+            })
         } else {
             res.send({
                 msg: 'false'

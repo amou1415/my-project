@@ -65,6 +65,7 @@
         >
           <p style="font-size: 14px; margin-bottom: 10px;" v-text="'昵称：' + msg.name"></p>
           <p style="font-size: 14px; margin-bottom: 10px;" v-text="'Email：' + msg.email"></p>
+          <p style="font-size: 14px; margin-bottom: 10px;" v-text="'ID：' + msg.id"></p>
           <div style="text-align: right; margin: 0">
             <el-button @click="loginOut" type="primary" plain size="mini"
               >退出登陆</el-button
@@ -103,7 +104,9 @@ export default {
       this.lg_out = "animate__animated animate__fadeInDown";
       this.close_popover = false;
       this.succ_img = false;
-      this.msg = "";
+      setTimeout(()=>{
+        this.msg = "";
+      },200)
     },
     login() {
       this.dialog = true;
