@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
-import Top from '../views/TopGame.vue'
-import New from '../views/NewGame.vue'
-import Open from '../views/OpenPlatform.vue'
 
 Vue.use(VueRouter)
 
@@ -16,22 +12,22 @@ const routes = [{
     {
         path: '/about',
         name: 'About',
-        component: About
+        component: () => import("../views/About.vue")
     },
     {
         path: '/top',
         name: 'TopGame',
-        component: Top
+        component: () => import("../views/TopGame.vue")
     },
     {
         path: '/new-game',
         name: 'New',
-        component: New
+        component: () => import("../views/NewGame.vue")
     },
     {
         path: '/open-platform',
         name: 'Open',
-        component: Open
+        component: () => import("../views/OpenPlatform.vue")
     }
 ]
 const router = new VueRouter({
