@@ -1,11 +1,12 @@
 <template>
-  <div class="homeBody">
+  <div class="main">
     <Banner></Banner>
+    
   </div>
 </template>
 
 <script>
-import Banner from '../components/Banner'
+import Banner from '../components/home/Banner'
 export default {
   components: {
     Banner,
@@ -19,13 +20,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.homeBody {
+.main {
   width: 100vw;
   min-height: calc(100vh - 60px);
-
-  .indexImg {
-    width: 100vw;
-    padding: 0px 5.859vw 10px 5.859vw;
-  }
 }
 </style>
