@@ -35,7 +35,6 @@ app.post('/login', (req, res) => {
             }
             mysqlbase.mysql_base("insert into user set ?", insertDate, (inser_results) => {
                 if (inser_results.affectedRows > 0) {
-                    
                     mysqlbase.mysql_base('select * from user where u_name = ? and email = ?', sqlData, (inser_msg) => {
                         res.send({
                             msg: 'true',
