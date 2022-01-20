@@ -1,89 +1,99 @@
 <template>
-  <div class="viewport clearfix">
-    <!-- logo -->
-    <div class="logo fl">
-      <img src="../../assets/images/logo.jpg" alt="logo" />
-      <h1>鹏珏游戏</h1>
-    </div>
+  <header>
+    <div class="viewport clearfix">
+      <!-- logo -->
+      <div class="logo fl">
+        <img src="../../assets/images/logo.jpg" alt="logo" />
+        <h1>鹏珏游戏</h1>
+      </div>
 
-    <!-- 导航 -->
-    <div class="nav fl">
-      <ul class="clearfix">
-        <li class="nav-item fl">
-          <router-link to="/" replace>
-            <a class="text">首页</a>
-          </router-link>
-        </li>
-        <li class="nav-item fl">
-          <router-link to="/top" replace>
-            <a class="text">排行榜</a>
-          </router-link>
-        </li>
-        <li class="nav-item fl">
-          <router-link to="/new-game" replace>
-            <a class="text">新游</a>
-          </router-link>
-        </li>
-        <li class="nav-item fl">
-          <router-link to="/about" replace>
-            <a class="text">联系我们</a>
-          </router-link>
-        </li>
-        <li class="nav-item fl">
-          <router-link to="/open-platform" replace>
-            <a class="text">开放平台</a>
-          </router-link>
-        </li>
-      </ul>
-    </div>
+      <!-- 导航 -->
+      <div class="nav fl">
+        <ul class="clearfix">
+          <li class="nav-item fl">
+            <router-link to="/" replace>
+              <a class="text">首页</a>
+            </router-link>
+          </li>
+          <li class="nav-item fl">
+            <router-link to="/top" replace>
+              <a class="text">排行榜</a>
+            </router-link>
+          </li>
+          <li class="nav-item fl">
+            <router-link to="/new-game" replace>
+              <a class="text">新游</a>
+            </router-link>
+          </li>
+          <li class="nav-item fl">
+            <router-link to="/about" replace>
+              <a class="text">联系我们</a>
+            </router-link>
+          </li>
+          <li class="nav-item fl">
+            <router-link to="/open-platform" replace>
+              <a class="text">开放平台</a>
+            </router-link>
+          </li>
+        </ul>
+      </div>
 
-    <!-- 登陆/注册 -->
-    <div class="user fr">
-      <!-- 未登陆头像 -->
-      <img
-        src="../../assets/images/denglu.png"
-        @click.stop="login"
-        v-if="!succ_img"
-        :class="lg_out"
-        alt="头像"
-      />
-      <!-- 登陆后头像 -->
-      <div v-popover:sign-out>
+      <!-- 登陆/注册 -->
+      <div class="user fr">
+        <!-- 未登陆头像 -->
         <img
-          src="../../assets/images/yuhangyuan.png"
-          class="animate__animated animate__fadeInDown cancel_hand"
-          v-if="succ_img"
+          src="../../assets/images/denglu.png"
+          @click.stop="login"
+          v-if="!succ_img"
+          :class="lg_out"
           alt="头像"
         />
-        <!-- 用户信息提示框/退出登录 -->
-        <el-popover
-          ref="sign-out"
-          placement="top"
-          title="个人中心"
-          trigger="hover"
-          v-model="close_popover"
-        >
-          <p style="font-size: 14px; margin-bottom: 10px;" v-text="'昵称：' + msg.name"></p>
-          <p style="font-size: 14px; margin-bottom: 10px;" v-text="'Email：' + msg.email"></p>
-          <p style="font-size: 14px; margin-bottom: 10px;" v-text="'ID：' + msg.id"></p>
-          <div style="text-align: right; margin: 0">
-            <el-button @click="loginOut" type="primary" plain size="mini"
-              >退出登陆</el-button
-            >
-          </div>
-        </el-popover>
+        <!-- 登陆后头像 -->
+        <div v-popover:sign-out>
+          <img
+            src="../../assets/images/yuhangyuan.png"
+            class="animate__animated animate__fadeInDown cancel_hand"
+            v-if="succ_img"
+            alt="头像"
+          />
+          <!-- 用户信息提示框/退出登录 -->
+          <el-popover
+            ref="sign-out"
+            placement="top"
+            title="个人中心"
+            trigger="hover"
+            v-model="close_popover"
+          >
+            <p
+              style="font-size: 14px; margin-bottom: 10px"
+              v-text="'昵称：' + msg.name"
+            ></p>
+            <p
+              style="font-size: 14px; margin-bottom: 10px"
+              v-text="'Email：' + msg.email"
+            ></p>
+            <p
+              style="font-size: 14px; margin-bottom: 10px"
+              v-text="'ID：' + msg.id"
+            ></p>
+            <div style="text-align: right; margin: 0">
+              <el-button @click="loginOut" type="primary" plain size="mini"
+                >退出登陆</el-button
+              >
+            </div>
+          </el-popover>
+        </div>
       </div>
-    </div>
 
-    <!-- 登陆 -->
-    <login-dialog :dialog="dialog" @sand-close-dialog="close"></login-dialog>
-  </div>
+      <!-- 登陆 -->
+      <login-dialog :dialog="dialog" @sand-close-dialog="close"></login-dialog>
+    </div>
+  </header>
 </template>
 <script>
 import loginDialog from "../Login";
 
 export default {
-
   components: {
     loginDialog,
   },
@@ -104,9 +114,9 @@ export default {
       this.lg_out = "animate__animated animate__fadeInDown";
       this.close_popover = false;
       this.succ_img = false;
-      setTimeout(()=>{
+      setTimeout(() => {
         this.msg = "";
-      },200)
+      }, 200);
     },
     login() {
       this.dialog = true;

@@ -1,45 +1,47 @@
 <template>
-  <div class="foot ban_selected_text">
-    <div class="viewport clearfix">
-      <div class="about">
-        <ul>
-          <li class="fl" :key="index" v-for="(item, index) of aboutList">
-            <a :href="item.href" v-text="item.name"></a>
-          </li>
-        </ul>
-      </div>
-      <div class="clause">
-        <p style="margin-left: 150px; margin-bottom: 10px">
-          本公司产品适合10周岁以上用户使用&nbsp;未成年家长监护
-        </p>
-        <p>
-          <label for="">抵制不良游戏</label>
-          <label for="">拒绝盗版游戏</label>
-          <label for="">注意自我保护</label>
-          <label for="">谨防上当受骗</label>
-        </p>
-        <p>
-          <label for="">适度游戏益脑</label>
-          <label for="">沉迷游戏伤身</label>
-          <label for="">合理安排时间</label>
-          <label for="">享受健康生活</label>
-        </p>
-        <p style="margin-left: 53px; margin-top: 20px">
-          <label
-            for=""
-            :key="i"
-            v-for="(about, i) of company_about"
-            v-text="about"
-          ></label>
-          <label for=""
-            ><a href="http://beian.miit.gov.cn/" target="_blank"
-              >蜀ICP备xxxxxxx号-1</a
-            ></label
-          >
-        </p>
+  <footer>
+    <div class="foot ban_selected_text">
+      <div class="viewport clearfix">
+        <div class="about">
+          <ul>
+            <li class="fl" :key="index" v-for="(item, index) of aboutList">
+              <a :href="item.href" v-text="item.name"></a>
+            </li>
+          </ul>
+        </div>
+        <div class="clause">
+          <p style="margin-left: 150px; margin-bottom: 10px">
+            本公司产品适合10周岁以上用户使用&nbsp;未成年家长监护
+          </p>
+          <p>
+            <label for="">抵制不良游戏</label>
+            <label for="">拒绝盗版游戏</label>
+            <label for="">注意自我保护</label>
+            <label for="">谨防上当受骗</label>
+          </p>
+          <p>
+            <label for="">适度游戏益脑</label>
+            <label for="">沉迷游戏伤身</label>
+            <label for="">合理安排时间</label>
+            <label for="">享受健康生活</label>
+          </p>
+          <p style="margin-left: 53px; margin-top: 20px">
+            <label
+              for=""
+              :key="i"
+              v-for="(about, i) of company_about"
+              v-text="about"
+            ></label>
+            <label for=""
+              ><a href="http://beian.miit.gov.cn/" target="_blank"
+                >蜀ICP备xxxxxxx号-1</a
+              ></label
+            >
+          </p>
+        </div>
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 <script>
 export default {
