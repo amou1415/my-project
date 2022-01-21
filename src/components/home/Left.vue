@@ -23,15 +23,15 @@
         <div class="img_msg clearfix">
           <h3 v-text="item.game_msg"></h3>
           <div class="icons fl">
-            <a href="#" class="iconfont icon-dianzan">1</a>
+            <span class="iconfont icon-dianzan"></span>
           </div>
           <div class="icons fl">
             <router-link :to="{ path: '/details', query: { id: item.id } }">
-              <span class="iconfont icon-icon_msg">2</span>
+              <span class="iconfont icon-icon_msg"></span>
             </router-link>
           </div>
           <div class="icons fl">
-            <a :href="item.download" class="iconfont icon-xiazai1">3</a>
+            <a :href="item.download" class="iconfont icon-xiazai1"></a>
           </div>
         </div>
       </div>
@@ -147,6 +147,10 @@ export default {
           bottom: 40px;
           margin: 0 10px;
           color: #333;
+
+          .icon-dianzan {
+              cursor: pointer;
+          }
         }
       }
       .img_msg :nth-child(2) {

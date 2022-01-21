@@ -15,6 +15,9 @@ import axios from 'axios';
 import './assets/css/init.css'
 // 引入动画库
 import './assets/css/animate.min.css'
+// 引入点赞、评论、下载icon
+import './assets/fonts/iconfont.css'
+import './assets/fonts/iconfont'
 
 import qs from 'qs'
 
