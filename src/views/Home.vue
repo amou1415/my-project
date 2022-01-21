@@ -1,15 +1,17 @@
 <template>
   <div class="main">
     <Banner></Banner>
-    
+    <Content></Content>
   </div>
 </template>
 
 <script>
 import Banner from '../components/home/Banner'
+import Content from '../components/home/Content'
 export default {
   components: {
     Banner,
+    Content
   },
   data() {
     return {
