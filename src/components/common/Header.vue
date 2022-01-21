@@ -92,6 +92,10 @@
 </template>
 <script>
 import loginDialog from "../Login";
+import { mapActions,mapState } from 'pinia'
+import { useMainStore } from "../../store/store"
+
+const mainStore = useMainStore();
 
 export default {
   components: {
@@ -110,10 +114,14 @@ export default {
   },
   watch: {},
   methods: {
+    ...mapState(mainStore,['userMsg']),
+    ...mapActions(mainStore,['loginUser']),
+    ...mapActions(mainStore,['removeUser']),
     loginOut() {
       this.lg_out = "animate__animated animate__fadeInDown";
       this.close_popover = false;
       this.succ_img = false;
+      mainStore.removeUser();
       setTimeout(() => {
         this.msg = "";
       }, 200);
@@ -125,6 +133,8 @@ export default {
       this.dialog = false;
       if (msg != "") {
         this.msg = msg;
+        mainStore.loginUser(msg)
+        console.log(mainStore.userMsg,'userMsg');
         this.$message({
           message: "欢迎！尊敬的  " + msg.name,
           type: "success",

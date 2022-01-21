@@ -59,11 +59,11 @@ export default {
       axios
         .post("/api/getGameList")
         .then((res) => {
-          console.log(res.data.list, "res");
+        //   console.log(res.data.list, "res");
           that_.list = res.data.list;
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     },
   },
@@ -156,13 +156,14 @@ export default {
       .img_msg :nth-child(2) {
         color: #aaa;
         font-size: 22px;
-        right: 70px;
+        right: 100px;
         transform: translateY(100px);
         transition: transform 0.3s;
       }
       .img_msg :nth-child(3) {
         color: #0aad0a;
         font-size: 22px;
+        right: 53px;
         transform: translateY(120px);
         transition: transform 0.4s;
       }
@@ -183,7 +184,7 @@ export default {
         transform: translateY(0px);
       }
       .icons {
-        transform: translateY(0px);
+        transform: translateY(10px);
       }
     }
   }

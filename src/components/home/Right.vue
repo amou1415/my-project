@@ -1,5 +1,5 @@
 <template>
-  
+  <div class="newGameTop fr"></div>
 </template>
 
 <script>
