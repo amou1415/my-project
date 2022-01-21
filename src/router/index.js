@@ -7,7 +7,10 @@ Vue.use(VueRouter)
 const routes = [{
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+            keepAlive: false, //此组件不需要被缓存
+        }
     },
     {
         path: '/about',
@@ -28,6 +31,11 @@ const routes = [{
         path: '/open-platform',
         name: 'Open',
         component: () => import("../views/OpenPlatform.vue")
+    },
+    {
+        path: '/details',
+        name: 'Details',
+        component: () => import("../views/Details.vue")
     }
 ]
 const router = new VueRouter({
