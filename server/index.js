@@ -102,6 +102,31 @@ app.post('/register', (req, res) => {
     })
 })
 
+// 获取首页游戏列表
+app.post('/getGameList',(req, res) => {
+    let data = req.body;
+    let sql;
+    console.log(data.id,'data');
+    if(data.id === undefined){
+        sql = 'SELECT * FROM game';
+        mysqlbase.mysql_base(sql,data,(game_msg)=>{
+            res.send({
+                msg: '成功',
+                list: game_msg
+            });
+        })
+    }else {
+        sql = 'select * from game where id = ?';
+        mysqlbase.mysql_base(sql,[data.id],(res_)=>{
+            console.log(res_);
+            res.send({
+                msg: '成功',
+                list: res_
+            });
+        })
+    }
+    
+})
 
 
 app.listen("3000", () => {
