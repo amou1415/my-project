@@ -1,5 +1,5 @@
 // store.js
-import {defineStore} from "pinia";
+import { defineStore } from "pinia";
 
 // 定义容器 
 // 参数1:容器 ID，必须唯一，之后pinia会把所有容器挂载到根容器

@@ -92,10 +92,10 @@
 </template>
 <script>
 import loginDialog from "../Login";
-import { mapActions,mapState } from 'pinia'
-import { useMainStore } from "../../store/store"
+import { mapStores } from "pinia";
+import { useMainStore } from "../../store/store";
 
-const mainStore = useMainStore();
+// const mainStore = useMainStore();
 
 export default {
   components: {
@@ -113,15 +113,19 @@ export default {
     };
   },
   watch: {},
+  computed: {
+    // ...mapState(useMainStore(),['userMsg']),
+    ...mapStores(useMainStore),
+  },
   methods: {
-    ...mapState(mainStore,['userMsg']),
-    ...mapActions(mainStore,['loginUser']),
-    ...mapActions(mainStore,['removeUser']),
+    // ...mapActions(useMainStore(), ["loginUser"]),
+    // ...mapActions(useMainStore(), ["removeUser"]),
     loginOut() {
       this.lg_out = "animate__animated animate__fadeInDown";
       this.close_popover = false;
       this.succ_img = false;
-      mainStore.removeUser();
+      useMainStore().removeUser();
+      console.log(useMainStore().userMsg, "退出登录的userMsg");
       setTimeout(() => {
         this.msg = "";
       }, 200);
@@ -133,8 +137,8 @@ export default {
       this.dialog = false;
       if (msg != "") {
         this.msg = msg;
-        mainStore.loginUser(msg)
-        console.log(mainStore.userMsg,'userMsg');
+        useMainStore().loginUser(msg);
+        console.log(useMainStore().userMsg, "登陆成功的userMsg");
         this.$message({
           message: "欢迎！尊敬的  " + msg.name,
           type: "success",

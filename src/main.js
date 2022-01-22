@@ -10,8 +10,6 @@ import vuetify from '@/plugins/vuetify'
 import router from './router/index'
 // 导入axios
 import axios from 'axios';
-// 导入pinia
-import { createPinia, PiniaVuePlugin } from 'pinia'
 
 // 引入初始化样式
 import './assets/css/init.css'
@@ -22,11 +20,12 @@ import './assets/fonts/iconfont.css'
 import './assets/fonts/iconfont'
 
 import qs from 'qs'
+import App from './App.vue';
+// 导入pinia
+import { createPinia, PiniaVuePlugin } from 'pinia';
 
-import App from './App.vue'
-
+Vue.use(ElementUI).use(qs).use(PiniaVuePlugin);
 const pinia = createPinia();
-Vue.use(ElementUI).use(qs).use(PiniaVuePlugin)
 
 Vue.config.productionTip = false
 
