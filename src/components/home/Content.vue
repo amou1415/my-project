@@ -8,12 +8,10 @@
 </template>
 
 <script>
-import Games from '../home/Left'
-import NewGames from '../home/Right'
 export default {
     components:{
-        Games,
-        NewGames
+        'Games' : () => import('../home/Left'),
+        'NewGames' : () => import('../home/Right'),
     }
 };
 </script>
