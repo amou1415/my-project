@@ -5,11 +5,11 @@
       <div class="gameTitle clearfix">
         <div class="appLogo fl">
           <router-link :to="{ path: '/details', query: { id: item.id } }">
-            <img :src="item.logo" :alt="item.name" />
+            <img v-lazy="item.logo" :key="item.id" :alt="item.name" />
           </router-link>
         </div>
         <router-link :to="{ path: '/details', query: { id: item.id } }">
-          <h3 v-text="item.name"></h3>
+          <h3 class="item_title" v-text="item.name"></h3>
         </router-link>
         <p class="lab">
           <label v-text="item.lab1"></label>
@@ -18,18 +18,21 @@
       </div>
       <!-- 游戏描述、展示 -->
       <div class="gameImg">
-        <img :src="item.bigimg" style="position: absolute" />
+        <img v-lazy="item.bigimg" :key="item.id" style="position: absolute" />
         <div class="mask"></div>
         <div class="img_msg clearfix">
           <h3 v-text="item.game_msg"></h3>
+          <!-- 点赞 -->
           <div class="icons fl">
             <span class="iconfont icon-dianzan"></span>
           </div>
+          <!-- 评论 -->
           <div class="icons fl">
             <router-link :to="{ path: '/details', query: { id: item.id } }">
               <span class="iconfont icon-icon_msg"></span>
             </router-link>
           </div>
+          <!-- 下载 -->
           <div class="icons fl">
             <a :href="item.download" class="iconfont icon-xiazai1"></a>
           </div>
@@ -48,6 +51,7 @@ export default {
   data() {
     return {
       list: "",
+      isActive: false,
     };
   },
   mounted() {
@@ -59,7 +63,6 @@ export default {
       axios
         .post("/api/getGameList")
         .then((res) => {
-        //   console.log(res.data.list, "res");
           that_.list = res.data.list;
         })
         .catch((err) => {
@@ -149,7 +152,7 @@ export default {
           color: #333;
 
           .icon-dianzan {
-              cursor: pointer;
+            cursor: pointer;
           }
         }
       }
