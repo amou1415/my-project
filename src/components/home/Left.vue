@@ -126,11 +126,11 @@ export default {
       .mask {
         position: absolute;
         width: 100%;
-        height: 110px;
-        margin-top: 256px;
+        height: 8.594vw;
+        margin-top: 20vw;
         background-color: rgba(0, 0, 0, 0.7);
         clip-path: polygon(0 100%, 100% 0, 100% 100%);
-        transform: translateY(110px);
+        transform: translateY(8.594vw);
         transition: transform 0.25s;
       }
       .img_msg {
@@ -147,8 +147,8 @@ export default {
         .icons {
           position: absolute;
           right: 40px;
-          bottom: 40px;
-          margin: 0 10px;
+          bottom: 3.125vw;
+          margin: 0 0.781vw;
           color: #333;
 
           .icon-dianzan {
@@ -160,21 +160,21 @@ export default {
         color: #aaa;
         font-size: 22px;
         right: 100px;
-        transform: translateY(100px);
+        transform: translateY(7.813vw);
         transition: transform 0.3s;
       }
       .img_msg :nth-child(3) {
         color: #0aad0a;
         font-size: 22px;
         right: 53px;
-        transform: translateY(120px);
+        transform: translateY(9.375vw);
         transition: transform 0.4s;
       }
       .img_msg :nth-child(4) {
         color: #ccb807;
         font-size: 22px;
         right: 10px;
-        transform: translateY(140px);
+        transform: translateY(10.938vw);
         transition: transform 0.45s;
       }
     }
@@ -187,7 +187,7 @@ export default {
         transform: translateY(0px);
       }
       .icons {
-        transform: translateY(10px);
+        transform: translateY(0.781vw);
       }
     }
   }
