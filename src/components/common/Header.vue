@@ -93,9 +93,7 @@
 <script>
 import loginDialog from "../Login";
 import { mapStores } from "pinia";
-import { useMainStore } from "../../store/store";
-
-// const mainStore = useMainStore();
+import { useUserStore } from "../../store/user";
 
 export default {
   components: {
@@ -114,18 +112,15 @@ export default {
   },
   watch: {},
   computed: {
-    // ...mapState(useMainStore(),['userMsg']),
-    ...mapStores(useMainStore),
+    ...mapStores(useUserStore),
   },
   methods: {
-    // ...mapActions(useMainStore(), ["loginUser"]),
-    // ...mapActions(useMainStore(), ["removeUser"]),
     loginOut() {
       this.lg_out = "animate__animated animate__fadeInDown";
       this.close_popover = false;
       this.succ_img = false;
-      useMainStore().removeUser();
-      console.log(useMainStore().userMsg, "退出登录的userMsg");
+      useUserStore().removeUser();
+      console.log(useUserStore().userMsg, "退出登录的userMsg");
       setTimeout(() => {
         this.msg = "";
       }, 200);
@@ -137,8 +132,8 @@ export default {
       this.dialog = false;
       if (msg != "") {
         this.msg = msg;
-        useMainStore().loginUser(msg);
-        console.log(useMainStore().userMsg, "登陆成功的userMsg");
+        useUserStore().loginUser(msg);
+        console.log(useUserStore().userMsg, "登陆成功的userMsg");
         this.$message({
           message: "欢迎！尊敬的  " + msg.name,
           type: "success",
