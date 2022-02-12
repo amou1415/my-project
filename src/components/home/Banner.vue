@@ -3,7 +3,7 @@
     <v-app>
       <v-parallax
         src="http://www.100game.cn/uploads/200603/1-2006030Z92b29.jpg"
-        height="500"
+        height="450"
       >
         <v-row align="center" justify="center">
           <v-col class="text-center" cols="12">
