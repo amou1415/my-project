@@ -1,58 +1,69 @@
 <template>
   <div class="gameList fl">
-    <div class="item" v-for="item in list" :key="item.id">
-      <!-- 游戏标题内容 -->
-      <div class="gameTitle clearfix">
-        <div class="appLogo fl">
-          <router-link :to="{ path: '/details', query: { id: item.id } }">
-            <img v-lazy="item.logo" :key="item.id" :alt="item.name" />
-          </router-link>
-        </div>
-        <router-link :to="{ path: '/details', query: { id: item.id } }">
-          <h3 class="item_title" v-text="item.name"></h3>
-        </router-link>
-        <p class="lab">
-          <label v-text="item.lab1"></label>
-          <label v-text="item.lab2"></label>
-        </p>
-      </div>
-      <!-- 游戏描述、展示 -->
-      <div class="gameImg">
-        <img v-lazy="item.bigimg" :key="item.id" style="position: absolute" />
-        <div class="mask"></div>
-        <div class="img_msg clearfix">
-          <h3 v-text="item.game_msg"></h3>
-          <!-- 点赞 -->
-          <div class="icons fl">
-            <span class="iconfont icon-dianzan"></span>
-          </div>
-          <!-- 评论 -->
-          <div class="icons fl">
+    <Sloter>
+      <div class="item" v-for="item in list" :key="item.id">
+        <!-- 游戏标题内容 -->
+        <div class="gameTitle clearfix">
+          <div class="appLogo fl">
             <router-link :to="{ path: '/details', query: { id: item.id } }">
-              <span class="iconfont icon-icon_msg"></span>
+              <img v-lazy="item.logo" :key="item.id" :alt="item.name" />
             </router-link>
           </div>
-          <!-- 下载 -->
-          <div class="icons fl">
-            <a :href="item.download" class="iconfont icon-xiazai1"></a>
+          <router-link :to="{ path: '/details', query: { id: item.id } }">
+            <h3 class="item_title" v-text="item.name"></h3>
+          </router-link>
+          <p class="lab">
+            <label v-text="item.lab1"></label>
+            <label v-text="item.lab2"></label>
+          </p>
+        </div>
+        <!-- 游戏描述、展示 -->
+        <div class="gameImg">
+          <img v-lazy="item.bigimg" :key="item.id" style="position: absolute" />
+          <div class="mask"></div>
+          <div class="img_msg clearfix">
+            <h3 v-text="item.game_msg"></h3>
+            <!-- 点赞 -->
+            <div class="icons fl">
+              <span class="iconfont icon-dianzan"></span>
+            </div>
+            <!-- 评论 -->
+            <div class="icons fl">
+              <router-link :to="{ path: '/details', query: { id: item.id } }">
+                <span class="iconfont icon-icon_msg"></span>
+              </router-link>
+            </div>
+            <!-- 下载 -->
+            <div class="icons fl">
+              <a :href="item.download" class="iconfont icon-xiazai1"></a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Sloter>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { mapStores } from "pinia";
+import { useUserStore } from "../../store/user";
+import Sloter from "../common/Slot";
 
 // 还可优化滑到底部加载更多
 
 export default {
+  components: {
+    Sloter,
+  },
   data() {
     return {
       list: "",
       isActive: false,
     };
+  },
+  computed: {
+    ...mapStores(useUserStore),
   },
   mounted() {
     this.getList();
@@ -63,7 +74,8 @@ export default {
       axios
         .post("/api/getGameList")
         .then((res) => {
-          that_.list = res.data.list;
+          that_.list = [];
+          useUserStore().gameList = res.data.list;
         })
         .catch((err) => {
           console.error(err);
