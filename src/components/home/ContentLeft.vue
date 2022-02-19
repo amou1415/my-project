@@ -25,7 +25,7 @@
             <h3 v-text="item.game_msg"></h3>
             <!-- 点赞 -->
             <div class="icons fl">
-              <span class="iconfont icon-dianzan"></span>
+              <span @click="changeColor" class="iconfont icon-dianzan"></span>
             </div>
             <!-- 评论 -->
             <div class="icons fl">
@@ -60,6 +60,7 @@ export default {
     return {
       list: "",
       isActive: false,
+      likeThis: "#aaa",
     };
   },
   computed: {
@@ -69,12 +70,15 @@ export default {
     this.getList();
   },
   methods: {
+    changeColor(e) {
+      e.target.style.color = "rgb(8, 124, 219)"
+    },
     getList() {
       let that_ = this;
       axios
         .post("/api/getGameList")
         .then((res) => {
-          that_.list = [];
+          that_.list = res.data.list;
           useUserStore().gameList = res.data.list;
         })
         .catch((err) => {
