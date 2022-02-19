@@ -38,6 +38,11 @@ Vue.prototype.$axios = axios;
 new Vue({
   router,
   vuetify,
+  inject: {
+    theme: {
+      default: { isDark: false },
+    },
+  },
   pinia,
   render: h => h(App),
 }).$mount('#app')
