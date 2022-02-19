@@ -10,8 +10,8 @@
 <script>
 export default {
     components:{
-        'Games' : () => import('../home/Left'),
-        'NewGames' : () => import('../home/Right'),
+        'Games' : () => import('../home/ContentLeft'),
+        'NewGames' : () => import('../home/ContentRight'),
     }
 };
 </script>
