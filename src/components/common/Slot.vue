@@ -21,7 +21,7 @@ export default {
         .content {
             width: 100%;
             font-size: 14px;
-            color: rgb(175, 175, 175);
+            color: rgb(158, 158, 158);
             text-align: center;
         }
     }
